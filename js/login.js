@@ -8,7 +8,7 @@ $(document).on('submit', '#loginForm', function (e) {
         success: function (data) {
 
             if (data != 'ERROR') {
-                window.location.href = 'inedx.php'
+                window.location.href = 'index.php'
             } else {
                 alert("ERROR");
             }

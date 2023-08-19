@@ -25,30 +25,47 @@ if (!$userController->isLogin()) {
 
 <body>
 
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="task.php">New task</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="api/login.php?logout">Sign out</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="container">
     <div class="row">
-      <a href="api/login.php?logout">Sing out</a>
-    </div>
-    
-    <div class="row">
       <form class="mb-2 mt-2">
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="selected-status" id="selected-status-0" value="0" checked="checked"/>
-        <label class="form-check-label" for="selected-status-0">ALL</label>
-      </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="selected-status" id="selected-status-0" value="0"
+            checked="checked" />
+          <label class="form-check-label" for="selected-status-0">ALL</label>
+        </div>
 
-      <?php 
+        <?php
         $statuses = $statusContoller->getAllStatuses();
         $statusesArray = json_decode($statuses);
 
         foreach ($statusesArray as $status) {
           $statusModel = StatusModel::fromJson(json_encode($status));
-          echo "<div class='form-check form-check-inline'>".
-          "<input class='form-check-input' type='radio' name='selected-status' id='selected-status-".$statusModel->getId()."' value='".$statusModel->getId()."'/>".
-          "<label class='form-check-label' for='selected-status-0'>".$statusModel->getStatus()."</label>".
-          "</div>";
+          echo "<div class='form-check form-check-inline'>" .
+            "<input class='form-check-input' type='radio' name='selected-status' id='selected-status-" . $statusModel->getId() . "' value='" . $statusModel->getId() . "'/>" .
+            "<label class='form-check-label' for='selected-status-0'>" . $statusModel->getStatus() . "</label>" .
+            "</div>";
         }
-      ?>
+        ?>
       </form>
     </div>
 
@@ -73,7 +90,7 @@ if (!$userController->isLogin()) {
               "<td>" . $taskModedl->getTaskId() . "</td>" .
               "<td>" . $taskModedl->getName() . "</td>" .
               "<td>" . $taskModedl->getStatus()->getStatus() . "</td>" .
-              "<td>" . "<a href='task.php?id=".$taskModedl->getTaskId()."'>Edit</a>" . "</td>" .
+              "<td>" . "<a href='task.php?id=" . $taskModedl->getTaskId() . "'>Edit</a>" . "</td>" .
               "</tr>";
           }
         }

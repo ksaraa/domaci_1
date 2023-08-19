@@ -34,13 +34,30 @@ if (isset($_GET['id'])) {
 
 </head>
 
+
+
 <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">New task  <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="api/login.php?logout">Sign out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container">
-    <div class="row">
-        <a href="index.php">Home</a>
-      <a href="api/login.php?logout">Sing out</a>
-    </div>
         <div class="row">
             <h3 class="mt-3 text-success text-center">TASK</h3>
             <p class="text-center" id="msg"></p>
@@ -56,25 +73,25 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="mb-3 mt-3">
                     <?php
-                        $statusField = "";
-                        if (!$selectDisabled) {
-                            $statusField .= "<select name='task_status' class='form-select'>";
-                        }
-                        foreach ($statusesArray as $status) {
-                            $statusModel = StatusModel::fromJson(json_encode($status));
-                            if ($selectDisabled) {
-                                if ($statusModel->getStatus() == "open") {
-                                    $statusField = "<input type='hidden' name='task_status' value='" . $statusModel->getId() . "'>";
-                                }
-                            } else {
-                                $selected = !$selectDisabled && $statusModel->getId() == $task->getStatus()->getId() ? "selected" : "";
-                                $statusField .= "<option value='" . $statusModel->getId() . "' " . $selected . ">" . $statusModel->getStatus() . "</option>";
+                    $statusField = "";
+                    if (!$selectDisabled) {
+                        $statusField .= "<select name='task_status' class='form-select'>";
+                    }
+                    foreach ($statusesArray as $status) {
+                        $statusModel = StatusModel::fromJson(json_encode($status));
+                        if ($selectDisabled) {
+                            if ($statusModel->getStatus() == "open") {
+                                $statusField = "<input type='hidden' name='task_status' value='" . $statusModel->getId() . "'>";
                             }
+                        } else {
+                            $selected = !$selectDisabled && $statusModel->getId() == $task->getStatus()->getId() ? "selected" : "";
+                            $statusField .= "<option value='" . $statusModel->getId() . "' " . $selected . ">" . $statusModel->getStatus() . "</option>";
                         }
-                        if (!$selectDisabled) {
-                            $statusField .= "</select>";
-                        }
-                        echo $statusField;
+                    }
+                    if (!$selectDisabled) {
+                        $statusField .= "</select>";
+                    }
+                    echo $statusField;
                     ?>
                 </div>
                 <button type="submit" class="btn btn-primary">SAVE</button>
