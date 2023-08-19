@@ -37,6 +37,10 @@ if (isset($_GET['id'])) {
 <body>
 
     <div class="container">
+    <div class="row">
+        <a href="index.php">Home</a>
+      <a href="api/login.php?logout">Sing out</a>
+    </div>
         <div class="row">
             <h3 class="mt-3 text-success text-center">TASK</h3>
             <p class="text-center" id="msg"></p>
