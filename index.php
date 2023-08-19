@@ -26,6 +26,9 @@ if (!$userController->isLogin()) {
 <body>
 
   <div class="container">
+    <div class="row">
+      <a href="api/login.php?logout">Sing out</a>
+    </div>
     
     <div class="row">
       <form class="mb-2 mt-2">

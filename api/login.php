@@ -7,7 +7,7 @@
 
     if(isset($_GET['logout'])) {
         SessionUtil::endSession();
-        header("Location: login.php");
+        header("Location: ../login.php");
     }
 
 
